@@ -13,9 +13,11 @@ class llayer (layer):
         if w is None:
             w = np.zeros(self.size)
         if b is None:
-            b=np.zeros(self.size[1])
-        self.w = w
-        self.b = b
+            b = np.zeros(self.size[1])
+        self.w = np.array(w)
+        self.b = np.array(b)
+    def __call__(self, i):
+        return np.matmul(self.w, i)+self.b
 
 class nlayer (layer):
     def __init__(self, size, fun=None):
