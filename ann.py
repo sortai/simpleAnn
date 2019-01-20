@@ -5,10 +5,17 @@ class SizeMismatch (Exception):
     pass
 
 class layer:
+    pass
+
+class llayer (layer):
     def __init__(self, size):
         pass
 
-class ann (layer):
+class nlayer (layer):
+    def __init__(self, size, fun=None):
+        pass
+
+class ann (layer, llayer):
     def __init__(self, size, layers=None):
         if layers is None:
             self._monolayer=True
