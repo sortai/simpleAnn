@@ -19,7 +19,11 @@ class llayer (layer):
 
 class nlayer (layer):
     def __init__(self, size, fun=None):
-        pass
+        try: self.size = tuple(size)
+        except TypeError as error:
+            if e.args[0].endswith(" object is not iterable"):
+                self.size = (size, size)
+            else: raise e
 
 class ann (layer, llayer):
     def __init__(self, size, layers=None):
