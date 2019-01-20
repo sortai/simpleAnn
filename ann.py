@@ -23,6 +23,7 @@ class nlayer (layer):
         except TypeError: self.size = (size, size)
         if fun is None:
             fun = Dfuns["lReLU"] #default
+        self.fun = fun
 
 class ann (layer, llayer):
     def __init__(self, size, layers=None):
