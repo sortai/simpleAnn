@@ -8,8 +8,14 @@ class layer:
     pass
 
 class llayer (layer):
-    def __init__(self, size):
-        pass
+    def __init__(self, size, w=None, b=None):
+        self.size=size
+        if w is None:
+            w=np.zeros(self.size)
+        if b is None:
+            b=np.zeros(self.size[1])
+        self.w=w
+        self.b=b
 
 class nlayer (layer):
     def __init__(self, size, fun=None):
