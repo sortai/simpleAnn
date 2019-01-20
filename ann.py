@@ -1,5 +1,5 @@
 import numpy as np
-
+from difun import difun, Dfuns #differentiable functions + premade
 
 class SizeMismatch (Exception):
     pass
@@ -21,6 +21,8 @@ class nlayer (layer):
     def __init__(self, size, fun=None):
         try: self.size = tuple(size)
         except TypeError: self.size = (size, size)
+        if fun is None:
+            fun = Dfuns["lReLU"] #default
 
 class ann (layer, llayer):
     def __init__(self, size, layers=None):
