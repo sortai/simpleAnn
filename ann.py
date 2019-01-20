@@ -26,6 +26,8 @@ class nlayer (layer):
         if fun is None:
             fun = Dfuns["lReLU"] #default
         self.fun = fun
+    def __call__(self, i):
+        return self.fun(i)
 
 class ann (layer, llayer):
     def __init__(self, size, layers=None):
