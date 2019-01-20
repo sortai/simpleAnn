@@ -1,4 +1,4 @@
 # simpleAnn
-A simple artificial neural network implementation
+A simple artificial neural network implementation.
 
-This project is at its core a test
+This project is at its core a test.
