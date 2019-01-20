@@ -19,7 +19,8 @@ class difun:
         return (self(i+self.__p)-self(i))/self.__p
 
 Dfuns = {
-    "i": difun(lambda x: x, lambda x: 1),
-    "ReLU": difun(lambda x: max(0, x)),
-    "lReLU": difun(lambda x: max(x, x*.1)),
+    "i": difun(lambda x: x, lambda x: x*0+1),
+    "ReLU": difun(lambda x: np.maximum(0, x)),
+    "lReLU": difun(lambda x: np.maximum(x, x*.1)),
     }
+
