@@ -59,7 +59,7 @@ class ann (llayer):
         return self.__monolayer
     @monolayer.setter
     def monolayer(self, m):
-        raise AttributeError('you can\'t actually change the "monolayer" property')
+        raise AttributeError('You can\'t actually change the "monolayer" property directly')
     def __call__(self, i):
         if self.__monolayer:
             return super().__call__(i)
