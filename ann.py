@@ -33,10 +33,10 @@ class ann (llayer):
     def __init__(self, size, layers=None):
         self.size = tuple(size)
         if layers is None:
-            self._monolayer=True
+            self.__monolayer=True
             super().__init__(size)
         else:
-            self._monolayer=False
+            self.__monolayer=False
             if len(layers) < 1:
                 raise SizeMismatch("not enough layers provided")
             if size[0]!=layers[0].size[0]:
@@ -53,9 +53,12 @@ class ann (llayer):
             self.sizes = tuple(self.sizes)
     @property
     def monolayer(self):
-        return self._monolayer
+        return self.__monolayer
+    @monolayer.setter
+    def monolayer(self, m):
+        raise AttributeError('you can\'t actually change the "monolayer" property')
     def __call__(self, i):
-        if self._monolayer:
+        if self.__monolayer:
             return super().__call__(i)
         for layer in self.layers:
             i=layer(i)
