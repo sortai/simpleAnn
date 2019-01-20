@@ -11,7 +11,7 @@ class llayer (layer):
     def __init__(self, size, w=None, b=None):
         self.size = tuple(size)
         if w is None:
-            w = np.zeros(self.size)
+            w = np.zeros((self.size[1],self.size[0]))
         if b is None:
             b = np.zeros(self.size[1])
         self.w = np.array(w)
@@ -39,9 +39,9 @@ class ann (llayer):
             self.__monolayer=False
             if len(layers) < 1:
                 raise SizeMismatch("not enough layers provided")
-            if size[0]!=layers[0].size[0]:
+            if self.size[0]!=layers[0].size[0]:
                 raise SizeMismatch("The input size of the network doesn't match with the input size of the first layer")
-            if size[1]!=layers[-1].size[2]:
+            if self.size[1]!=layers[-1].size[1]:
                 raise SizeMismatch("The output size of the network doesn't match with the output size of the last layer")
             self.layers = layers
             self.sizes=[self.size[0]]
