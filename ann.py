@@ -27,14 +27,14 @@ class nlayer (layer):
             fun = Dfuns["lReLU"] #default
         self.fun = fun
     def __call__(self, i):
-        return self.fun(i)
+        return self.fun(np.array(i))
 
-class ann (layer, llayer):
+class ann (llayer):
     def __init__(self, size, layers=None):
         self.size = tuple(size)
         if layers is None:
             self._monolayer=True
-            super().__init__(self, size)
+            super().__init__(size)
         else:
             self._monolayer=False
             if len(layers) < 1:
@@ -56,7 +56,7 @@ class ann (layer, llayer):
         return self._monolayer
     def __call__(self, i):
         if self._monolayer:
-            return super().__call__(self, i)
+            return super().__call__(i)
         for layer in self.layers:
             i=layer(i)
         return i
