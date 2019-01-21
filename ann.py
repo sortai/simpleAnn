@@ -67,3 +67,11 @@ class ann (llayer):
         for layer in self.layers:
             i=layer(i)
         return i
+    def dei(self, i):
+        de=self.layers[0].dei(i)
+        i=self.layers[0](i)
+        for layer in self.layers[1:]:
+            de=np.matmul(de, layer(i))
+            i=layer(i)
+        return de
+            
