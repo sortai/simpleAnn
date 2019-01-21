@@ -18,6 +18,8 @@ class llayer (layer):
         self.b = np.array(b)
     def __call__(self, i):
         return np.matmul(self.w, i)+self.b
+    def dei(self, i):
+        return self.w.copy()
 
 class nlayer (layer):
     def __init__(self, size, fun=None):
