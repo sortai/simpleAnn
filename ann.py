@@ -28,9 +28,8 @@ class nlayer (layer):
         self.fun = fun
     def __call__(self, i):
         return self.fun(np.array(i))
-    @property
     def dei(self, i):
-        return self.fun.de(i)
+        return self.fun.de(np.array(i))
 
 class ann (llayer):
     def __init__(self, size, layers=None):
