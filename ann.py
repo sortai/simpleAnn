@@ -34,11 +34,12 @@ class nlayer (layer):
         return self.fun.de(np.array(i))
 
 class ann (llayer):
-    def __init__(self, size, layers=None):
+    def __init__(self, size=None, layers=None):
+        if size is None: size=(layers[0].size[0], layers[-1].size[1])
         self.size = tuple(size)
         if layers is None:
             self.__monolayer=True
-            super().__init__(size)
+            super().__init__(self.size)
         else:
             self.__monolayer=False
             if len(layers) < 1:
@@ -67,11 +68,11 @@ class ann (llayer):
         for layer in self.layers:
             i=layer(i)
         return i
-    def dei(self, i):
-        de=self.layers[0].dei(i)
-        i=self.layers[0](i)
-        for layer in self.layers[1:]:
-            de=np.matmul(de, layer(i))
-            i=layer(i)
-        return de
+##    def dei(self, i):
+##        de=self.layers[0].dei(i)
+##        i=self.layers[0](i)
+##        for layer in self.layers[1:]:
+##            de=np.matmul(de, layer(i))
+##            i=layer(i)
+##        return de
             
