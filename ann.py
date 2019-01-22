@@ -31,7 +31,9 @@ class nlayer (layer):
     def __call__(self, i):
         return self.fun(np.array(i))
     def dei(self, i):
-        return self.fun.de(np.array(i))
+        i=np.array(i)
+        if (not isinstance(i.size, int)) or i.size!=self.size[0]: raise SizeMismatch("nlayer.dei(self, {})".format(i))
+        return self.fun.de(i)
 
 class ann (llayer):
     def __init__(self, layers=None, size=None):
