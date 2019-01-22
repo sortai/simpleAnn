@@ -34,7 +34,7 @@ class nlayer (layer):
         return self.fun.de(np.array(i))
 
 class ann (llayer):
-    def __init__(self, size=None, layers=None):
+    def __init__(self, layers=None, size=None):
         if size is None: size=(layers[0].size[0], layers[-1].size[1])
         self.size = tuple(size)
         if layers is None:
@@ -72,7 +72,7 @@ class ann (llayer):
 ##        de=self.layers[0].dei(i)
 ##        i=self.layers[0](i)
 ##        for layer in self.layers[1:]:
-##            de=np.matmul(de, layer(i))
+##            de=np.matmul(de.swapaxes(0,1), layer(i))
 ##            i=layer(i)
 ##        return de
             
