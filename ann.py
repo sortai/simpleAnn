@@ -16,9 +16,9 @@ class llayer (layer):
             b = np.ones(self.size[1])
         self.w = np.array(w)
         self.b = np.array(b)
-    def __call__(self, i):
+    def __call__(self, *i):
         return np.matmul(self.w, i)+self.b
-    def dei(self, i):
+    def dei(self, *i):
         return self.w.copy()
 
 class nlayer (layer):
@@ -28,9 +28,9 @@ class nlayer (layer):
         if fun is None:
             fun = Dfuns["lReLU"] #default
         self.fun = fun
-    def __call__(self, i):
+    def __call__(self, *i):
         return self.fun(np.array(i))
-    def dei(self, i):
+    def dei(self, *i):
         i=np.array(i)
         if (not isinstance(i.size, int)) or i.size!=self.size[0]: raise SizeMismatch("nlayer.dei(self, {})".format(i))
         return self.fun.de(i)
@@ -64,17 +64,17 @@ class ann (llayer):
     @monolayer.setter
     def monolayer(self, m):
         raise AttributeError('You can\'t actually change the "monolayer" property directly')
-    def __call__(self, i):
+    def __call__(self, *i):
         if self.__monolayer:
             return super().__call__(i)
         for layer in self.layers:
             i=layer(i)
         return i
-##    def dei(self, i):
-##        de=self.layers[0].dei(i)
-##        i=self.layers[0](i)
-##        for layer in self.layers[1:]:
-##            de=np.matmul(de.swapaxes(0,1), layer(i))
-##            i=layer(i)
-##        return de
+    def dei(self, *i):
+        de=self.layers[0].dei(i)
+        i=self.layers[0](i)
+        for layer in self.layers[1:]:
+            de=np.matmul(layer(i), de)
+            i=layer(i)
+        return de
             
