@@ -13,7 +13,7 @@ class llayer (layer):
         if w is None:
             w = np.zeros((self.size[1],self.size[0]))
         if b is None:
-            b = np.zeros(self.size[1])
+            b = np.ones(self.size[1])
         self.w = np.array(w)
         self.b = np.array(b)
     def __call__(self, i):
