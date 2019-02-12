@@ -20,6 +20,8 @@ class llayer (layer):
         return np.matmul(self.w, i)+self.b
     def dei(self, *i):
         return self.w.copy()
+    def dew(self, *i):
+        #repeat i so it fills self.w
 
 class nlayer (layer):
     def __init__(self, fun=None):
